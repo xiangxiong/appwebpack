@@ -10,5 +10,22 @@ module.exports = {
         path:path.join(__dirname,'dist'),
         filename:'[name].js'
     },
-    mode:'production'
+    plugins:[
+    ],
+    mode:'production',
+    module:{
+        rules:[
+            {
+                test:/.js$/,
+                use:'babel-loader'
+            },
+            {
+                test:/.css$/,
+                use:[
+                    'style-loader',
+                    'css-loader'
+                ]
+            }
+        ]
+    }
 }
