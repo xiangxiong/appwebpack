@@ -303,6 +303,103 @@ npm i lib-flexible -S
 利用正则匹配规则或者页面名称.
 生成动态的htmlPlugins, 组合到Plugins.
 
+# source map.
+* 
+
+## 提取页面的公共资源.
+
+基础库分离.
+
+SplitChunksPlugin:
+```
+    optimization: {
+        splitChunks: { cacheGroups: {
+        commons: {
+        test: /(react|react-dom)/,
+        name: 'vendors',
+        chunks: 'all' }
+        } }
+    }
+```
+
+chunks 参数说明:
+* async 异步引入的库进行分离(默认).
+* initial 同步引入的库进行分离。
+* all 所有引入的库进行分离.
+
+引入cdn库:
+```
+  // new HtmlWebpackExternalsPlugin({
+        //     externals:[
+        //         {
+        //             module:'react',
+        //             entry:'https://unpkg.com/react@16/umd/react.production.min.js',
+        //             global:'React'
+        //         },{
+        //             module:'react-dom',
+        //             entry:'https://unpkg.com/react-dom@16/umd/react-dom.production.min.js',
+        //             global:'ReactDOM'
+        //         }
+        //     ]
+        // })
+```
+
+分离公共包.
+```
+ optimization: {
+        splitChunks: { minSize: 0, cacheGroups: {
+        commons: {
+                    name: 'commons', 
+                    chunks: 'all', 
+                    minChunks: 0
+                } 
+            }
+        }
+    }
+
+```
+
+### tree shaking(摇树优化).
+
+Tree-shaking 原理
+   ES6 模块的特点:
+   只能作为模块顶层的语 出现
+   import 的模块名只能是字符 常 
+   import binding 是 immutable的
+
+代码擦除: uglify 阶段删除无用代码
+
+## 现象:构建后的代码存在大量闭包代码
+
+会导致 么问题?
+大量作用域包裹代码,导致体积增 (模块越多越明显)
+运 代码时创建的函数作 域变多,内存开销变 
+
+结论:
+·被 webpack 转换后的模块会带上 层包裹 
+·import 会被转换成 __webpack_require.
+
+
+## scope hoisting 原理.
+原 :将所有模块的代码按照引 顺序放在 个函数作 域 ,然后适当的重命名 
+些变 以防 变 名冲突.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

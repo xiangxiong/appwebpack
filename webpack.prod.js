@@ -1,10 +1,12 @@
 'use strict'
 const path = require('path');
 const glob = require('glob');
+const webpack = require('webpack');
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebPackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
+const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin')
 
 const setMPA = () => {
     const entry = {};
@@ -20,7 +22,7 @@ const setMPA = () => {
         htmlWebpackPlugins.push(new HtmlWebpackPlugin({
             template: path.join(__dirname, `src/${pageName}/index.html`),
             filename: `${pageName}.html`,
-            chunks: [pageName],
+            chunks: ['vendors',pageName],
             inject: true,
             minify: {
                html5: true,
@@ -119,6 +121,30 @@ module.exports = {
             assetNameRegExp: /\.css$/g, 
             cssProcessor: require('cssnano')
         }),
-        new CleanWebPackPlugin()
+        new CleanWebPackPlugin(),
+        new webpack.optimize.ModuleConcatenationPlugin()
+        // new HtmlWebpackExternalsPlugin({
+        //     externals:[
+        //         {
+        //             module:'react',
+        //             entry:'https://unpkg.com/react@16/umd/react.production.min.js',
+        //             global:'React'
+        //         },{
+        //             module:'react-dom',
+        //             entry:'https://unpkg.com/react-dom@16/umd/react-dom.production.min.js',
+        //             global:'ReactDOM'
+        //         }
+        //     ]
+        // })
     ].concat(htmlWebpackPlugins)
+    // optimization: {
+    //     splitChunks: { minSize: 0, cacheGroups: {
+    //     commons: {
+    //                 name: 'commons', 
+    //                 chunks: 'all', 
+    //                 minChunks: 0
+    //             } 
+    //         }
+    //     }
+    // }
 }

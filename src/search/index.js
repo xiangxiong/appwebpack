@@ -1,14 +1,17 @@
 'use strict'
 import React from 'react';
 import ReactDOM from 'react-dom';
+// import '../../common';
 import logo from './../image/logo.png';
 import './index.less';
+import {a} from './tree-shaking';
 
 class Search extends React.Component{
     render(){
+        const funcA = a();
         return (
             <div className="normal">
-                Search Text 
+               {funcA} Search Text 
                 <img src={logo}/>
             </div>
         )
