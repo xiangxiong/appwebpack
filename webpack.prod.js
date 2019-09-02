@@ -119,7 +119,7 @@ module.exports = {
             filename:'[name]_[contenthash:8].css'
         }),
         new MyPlugin({
-            name:'my plugin'
+            filename:'offline'
         }),
         new OptimizeCSSAssetsPlugin({ 
             assetNameRegExp: /\.css$/g, 

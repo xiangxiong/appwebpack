@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/xiangxiong/appwebpack#readme",
   "dependencies": {
+    "jszip": "^3.2.2",
     "lib-flexible": "^0.3.2",
     "webpack": "4.31.0",
     "webpack-cli": "3.3.2"
