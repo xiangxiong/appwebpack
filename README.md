@@ -384,19 +384,26 @@ Tree-shaking 原理
 原 :将所有模块的代码按照引 顺序放在 个函数作 域 ,然后适当的重命名 
 些变 以防 变 名冲突.
 
+### 代码分割的意义
+
+如何使 动态 import?
+
+npm install @babel/plugin-syntax-dynamic-import --save-dev
+
+### webpack 和 eslint 结合.
+
+### webpack 打包库和组件.
+* webpack 除 可以 来打包应 ,也可以 来打包 js 库.
+* 实现 个 整数加法库的打包
+* · 需要打包压缩版和 压缩版本.
+* · 持 AMD/CJS/ESM 模块引用.
+
+### 测试.
+* 测试.
 
 
-
-
-
-
-
-
-
-
-
-
-
+### loader 的链式调用与执行顺序.
+* 
 
 
 

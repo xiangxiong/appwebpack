@@ -6,8 +6,7 @@ const miniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebPackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
-const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
-const MyPlugin = require('./plugins/my-plugin');
+const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin')
 
 const setMPA = () => {
     const entry = {};
@@ -117,9 +116,6 @@ module.exports = {
     plugins:[
         new miniCssExtractPlugin({
             filename:'[name]_[contenthash:8].css'
-        }),
-        new MyPlugin({
-            name:'my plugin'
         }),
         new OptimizeCSSAssetsPlugin({ 
             assetNameRegExp: /\.css$/g, 
